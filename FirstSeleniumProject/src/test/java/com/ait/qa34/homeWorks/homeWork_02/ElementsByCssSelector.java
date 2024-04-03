@@ -37,6 +37,22 @@ public class ElementsByCssSelector {
 
     }
 
+    @Test
+    public void findElementXPath() {
+
+        driver.findElement(By.xpath("//*[@id='flyout-cart']"));
+        driver.findElement(By.xpath("//*[@class='top-menu']"));
+        driver.findElement(By.xpath("//*[@href='http://www.nopcommerce.com/']"));
+        driver.findElement(By.xpath("//*[contains(@type,'script')]"));
+        driver.findElement(By.xpath("//*[starts-with(@style,'display')]"));
+        driver.findElement(By.xpath("//*[contains(text(),'use')]"));
+        driver.findElement(By.xpath("//div[@class='footer']//div[@class='footer-menu-wrapper']"));
+        driver.findElement(By.xpath("//div[@class='header']//div[@class='header-links-wrapper']//div[@class='mini-shopping-cart']"));
+        driver.findElement(By.xpath("//div[@class='header']//div[@class='header-links-wrapper']//div[@class='mini-shopping-cart']//div[@class='count']"));
+        driver.findElement(By.xpath("//div[@class='header']//div[@class='header-links']//*[@id='topcartlink']"));
+
+    }
+
     @AfterMethod
     public void tearDown() {
         driver.quit();
