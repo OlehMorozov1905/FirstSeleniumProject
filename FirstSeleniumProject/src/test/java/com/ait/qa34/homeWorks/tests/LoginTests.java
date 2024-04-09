@@ -1,35 +1,38 @@
-package com.ait.qa34.homeWorks.homeWork_07;
+package com.ait.qa34.homeWorks.tests;
 
 import com.demowebshop.models.User;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class DeleteItemFromCartTests extends BasePage {
+public class LoginTests extends BasePage {
 
     @BeforeMethod
     public void ensurePrecondition() {
-
         if (!app.getUser().isLoginLinkPresent()) {
             app.getUser().clickOnLogOutButton();
         }
+    }
 
+    @Test
+    public void loginPositiveTest() {
         app.getUser().clickOnLoginLink();
         app.getUser().fillLoginForm(new User()
                 .setEmail("pulp_fiction2024@gmail.com")
                 .setPassword("Chelsea$1905"));
         app.getUser().clickOnLoginButton();
 
-        app.getUser().clickOnButtonAddItemToCartAndViewShoppingCart();
+        Assert.assertTrue(app.getUser().isAccountEmailPresent());
     }
 
     @Test
-    public void deleteItemPositiveTest() {
-        int sizeBefore = app.getUser().sizeOfItems();
-        app.getUser().removeItem();
+    public void loginNegativeTestWithWrongPassword() {
+        app.getUser().clickOnLoginLink();
+        app.getUser().fillLoginForm(new User()
+                .setEmail("pulp_fiction2024@gmail.com")
+                .setPassword("WrongPassword"));
+        app.getUser().clickOnLoginButton();
 
-        app.getUser().pause(500);
-        int sizeAfter = app.getUser().sizeOfItems();
-        Assert.assertEquals(sizeAfter, sizeBefore - 1);
+        Assert.assertTrue(app.getUser().isErrorMessagePresent());
     }
 }

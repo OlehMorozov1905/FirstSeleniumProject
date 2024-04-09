@@ -1,12 +1,11 @@
-package com.ait.qa34.homeWorks.homeWork_07;
+package com.ait.qa34.homeWorks.tests;
 
 import com.demowebshop.models.User;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class AddItemToCartTests extends BasePage {
+public class DeleteItemFromCartTests extends BasePage {
 
     @BeforeMethod
     public void ensurePrecondition() {
@@ -20,17 +19,17 @@ public class AddItemToCartTests extends BasePage {
                 .setEmail("pulp_fiction2024@gmail.com")
                 .setPassword("Chelsea$1905"));
         app.getUser().clickOnLoginButton();
+
+        app.getUser().clickOnButtonAddItemToCartAndViewShoppingCart();
     }
 
     @Test
-    public void AddItemToCartPositiveTest() {
-        app.getUser().clickOnButtonAddItemToCartAndViewShoppingCart();
-        Assert.assertTrue(app.getUser().isItemAdded());
-
-    }
-
-    @AfterMethod
-    public void postCondition() {
+    public void deleteItemPositiveTest() {
+        int sizeBefore = app.getUser().sizeOfItems();
         app.getUser().removeItem();
+
+        app.getUser().pause(500);
+        int sizeAfter = app.getUser().sizeOfItems();
+        Assert.assertEquals(sizeAfter, sizeBefore - 1);
     }
 }

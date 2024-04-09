@@ -1,4 +1,4 @@
-package com.ait.qa34.homeWorks.homeWork_07;
+package com.ait.qa34.homeWorks.tests;
 
 import com.demowebshop.models.User;
 import org.testng.Assert;
